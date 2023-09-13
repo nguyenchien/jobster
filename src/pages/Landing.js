@@ -1,6 +1,6 @@
 import React from 'react'
 import main from '../assets/images/main.svg';
-import Wrapper from '../assets/wrappers/Testing'
+import Wrapper from '../assets/wrappers/Landing'
 import { Logo } from '../components'
 
 const Landing = () => {
