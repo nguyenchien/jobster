@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Logo } from '../components';
+import { Logo, FormRow } from '../components';
 import Wrapper from '../assets/wrappers/RegisterPage';
 
 const Register = () => {
@@ -14,10 +14,7 @@ const Register = () => {
   const [values, setValues] = useState(initialState);
   
   const handleChange = (e) => {
-    setValues({
-      ...initialState,
-      name: e.target.value
-    });
+    console.log(e.target);
   };
 
   const onSubmit = (e) => {
@@ -31,22 +28,34 @@ const Register = () => {
         <Logo />
         <h3>Login</h3>
         
-        <div className='form-row'>
-          <label htmlFor='name' className='form-label'>
-            name
-          </label>
-          <input
-            type='text'
-            value={values.name}
-            name='name'
-            onChange={handleChange}
-            className='form-input'
-          />
-        </div>
+        {/* name field */}
+        <FormRow 
+          type='text'
+          name='name'
+          value={values.name}
+          handleChange={handleChange}
+          labelText='Name'
+        />
         
-        <button type='submit' className='btn btn-block'>
-          submit
-        </button>
+        {/* email field */}
+        <FormRow 
+          type='email'
+          name='email'
+          value={values.email}
+          handleChange={handleChange}
+          labelText='Email'
+        />
+        
+        {/* password field */}
+        <FormRow 
+          type='password'
+          name='password'
+          value={values.password}
+          handleChange={handleChange}
+          labelText='Password'
+        />
+        
+        <button type='submit' className='btn btn-block'>submit</button>
       </form>
     </Wrapper>
   )
