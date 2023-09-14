@@ -14,11 +14,22 @@ const Register = () => {
   const [values, setValues] = useState(initialState);
   
   const handleChange = (e) => {
-    console.log(e.target);
+    const name = e.target.name;
+    const value = e.target.value;
+    setValues({
+      ...values,
+      [name]: value
+    });
+    console.log(values);
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
+    const { name, email, password, isMember } = values;
+    if ( !email || !password || (!name && !isMember) ) {
+      alert("Please enter all fields");
+      return;
+    }
     console.log(values);
   };
   
