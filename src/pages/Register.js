@@ -14,7 +14,10 @@ const Register = () => {
   const [values, setValues] = useState(initialState);
   
   const handleChange = (e) => {
-    setValues(e.target.value);
+    setValues({
+      ...initialState,
+      name: e.target.value
+    });
   };
 
   const onSubmit = (e) => {
@@ -34,7 +37,7 @@ const Register = () => {
           </label>
           <input
             type='text'
-            value={values.name || undefined}
+            value={values.name}
             name='name'
             onChange={handleChange}
             className='form-input'
