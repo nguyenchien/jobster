@@ -1,9 +1,9 @@
 import React from 'react'
 
-const AddJobs = () => {
+const AddJob = () => {
   return (
-    <h1>AddJobs</h1>
+    <h1>AddJob</h1>
   )
 }
 
-export default AddJobs
+export default AddJob
