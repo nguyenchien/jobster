@@ -11,6 +11,7 @@ const Navbar = () => {
   const toggle = () => {
     dispatch(toggleSidebar());
   }
+  const [showLogout, setShowLogout] = useState(false);
   
   return (
     <Wrapper>
@@ -30,13 +31,13 @@ const Navbar = () => {
           <button 
             type='button' 
             className="btn"
-            onClick={ () => console.log('toggle logout dropdown') }
+            onClick={ () => setShowLogout(!showLogout) }
           >
             <FaUserCircle />
             {user?.name}
             <FaCaretDown />
           </button>
-          <div className="dropdown show-dropdown">
+          <div className={`dropdown ${showLogout && 'show-dropdown'}`}>
             <button 
               type="button"
               className='dropdown-btn'
