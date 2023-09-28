@@ -17,13 +17,13 @@ const links = [
     icon: <MdQueryStats />,
   },
   {
-    id: 2,
+    id: 3,
     text: 'add job',
     path: 'add-job',
     icon: <FaWpforms />,
   },
   {
-    id: 2,
+    id: 4,
     text: 'profile',
     path: 'profile',
     icon: <ImProfile />,
