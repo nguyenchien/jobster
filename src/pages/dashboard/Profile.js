@@ -3,6 +3,7 @@ import FormRow from '../../components/FormRow'
 import Wrapper from "../../assets/wrappers/DashboardFormPage"
 import { useDispatch, useSelector } from "react-redux"
 import { toast } from "react-toastify"
+import { updateUser } from "../../features/user/userSlice"
 
 const Profile = () => {
   const { isLoading, user } = useSelector((store) => store.user);
@@ -20,6 +21,8 @@ const Profile = () => {
       toast.error('Please fill out all fileds');
       return;
     }
+    dispatch(updateUser(userData));
+    return;
   }
   const handleChange = (e) => {
     const name = e.target.name;

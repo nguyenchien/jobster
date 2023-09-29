@@ -16,7 +16,7 @@ const initialState = {
 const Register = () => {  
   const [values, setValues] = useState(initialState);
   const {user, isLoading} = useSelector(store => store.user);
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   
   const handleChange = (e) => {
@@ -36,10 +36,10 @@ const Register = () => {
       return;
     }
     if (isMember) {
-      dispath(loginUser({ email: email, password: password}));
+      dispatch(loginUser({ email: email, password: password}));
       return;
     }
-    dispath(registerUser({ name, email, password }));
+    dispatch(registerUser({ name, email, password }));
   };
   
   const toggleMember = () => {
