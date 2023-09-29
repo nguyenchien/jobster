@@ -13,6 +13,7 @@ const initialState = {
   user: getUserFromLocalStorage()
 };
 
+// First, create the thunk
 export const registerUser = createAsyncThunk (
   'user/registerUser',
   async (user, thunkAPI) => {
@@ -57,6 +58,7 @@ export const updateUser = createAsyncThunk (
   }
 );
 
+// Then, handle actions in your reducers:
 const userSlice = createSlice ({
   name: 'user',
   initialState,
