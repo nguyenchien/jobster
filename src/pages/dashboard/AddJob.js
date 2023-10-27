@@ -4,6 +4,8 @@ import Wrapper from '../../assets/wrappers/DashboardFormPage';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { handleChange, handleClearValue, createJob } from '../../features/job/jobSlice';
+import { useEffect } from 'react';
+import { getUserFromLocalStorage } from '../../utils/localStorage';
 
 const AddJob = () => {
   const {
@@ -18,6 +20,8 @@ const AddJob = () => {
     isEditing,
     editJobId,
   } = useSelector(store => store.job);
+  
+  const { user } = useSelector(store => store.user)
   
   const dispatch = useDispatch();
   
@@ -39,6 +43,10 @@ const AddJob = () => {
   const handleClearInput = () => {
     dispatch(handleClearValue());
   }
+  
+  useEffect (()=>{
+    dispatch(handleChange({name: 'jobLocation', value: user.location}));
+  }, []);
   
   return (
     <Wrapper>

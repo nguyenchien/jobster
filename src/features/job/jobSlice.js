@@ -2,7 +2,9 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import customFetch from "../../utils/axios";
 import { logoutUser } from "../user/userSlice";
+import { getUserFromLocalStorage } from "../../utils/localStorage";
 
+// init state
 const initialState = {
   isLoading: false,
   position: '',
@@ -16,6 +18,7 @@ const initialState = {
   editJobId: '',
 };
 
+// create job
 export const createJob = createAsyncThunk(
   'job/create',
   async (job, thunkAPI) => {
@@ -35,8 +38,9 @@ export const createJob = createAsyncThunk(
       return thunkAPI.rejectWithValue(error.response.data.msg);
     }
   }
-)
+);
 
+// job slice
 const jobSlice = createSlice({
   name: 'job',
   initialState,
@@ -45,7 +49,10 @@ const jobSlice = createSlice({
       state[name] = value;
     },
     handleClearValue: () => {
-      return initialState;
+      return {
+        ...initialState,
+        jobLocation: getUserFromLocalStorage()?.location || ''
+      };
     }
   },
   extraReducers: {
@@ -61,6 +68,7 @@ const jobSlice = createSlice({
       toast.error(payload);
     },
   }
-})
+});
+
 export default jobSlice.reducer;
 export const { handleChange, handleClearValue } = jobSlice.actions;
