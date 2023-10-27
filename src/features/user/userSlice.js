@@ -44,10 +44,13 @@ const userSlice = createSlice ({
     toggleSidebar: (state) => {
       state.isSidebarOpen = !state.isSidebarOpen;
     },
-    logoutUser: (state) => {
+    logoutUser: (state, { payload }) => {
       state.user = null;
       state.isSidebarOpen = false;
       removeUserFromLocalStorage();
+      if (payload) {
+        toast.success(payload);
+      }
     }
   },
   extraReducers: {
@@ -87,7 +90,7 @@ const userSlice = createSlice ({
       state.isLoading = false;
       state.user = user;
       addUserToLocalStorage(user);
-      toast.success(`User updated!`);
+      toast.success(`User Updated!`);
     },
     [updateUser.rejected]: (state, { payload }) => {
       state.isLoading = false;
