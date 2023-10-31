@@ -3,6 +3,7 @@ import {FaLocationArrow, FaBriefcase, FaCalendarAlt} from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import Wrapper from '../assets/wrappers/Job'
 import JobInfo from './JobInfo'
+import moment from 'moment'
 
 const Job = ({
   _id,
@@ -13,7 +14,7 @@ const Job = ({
   jobLocation,
   jobType,
 }) => {
-  const date = createdAt;
+  const date = moment(createdAt).format('YYYY-MM-DD HH:mm');
   return (
     <Wrapper>
       <header>
