@@ -2,11 +2,10 @@ import { showLoading, hideLoading, getAllJobs } from "../allJobs/allJobsSlice";
 import customFetch from "../../utils/axios";
 import { logoutUser } from "../user/userSlice";
 import { handleClearValue } from "./jobSlice";
-import authHeader from "../../utils/authHeader";
 
 export const createJobThunk = async (job, thunkAPI) => {
   try {
-    const resp = await customFetch.post('/jobs', job, authHeader(thunkAPI));
+    const resp = await customFetch.post('/jobs', job);
     thunkAPI.dispatch(handleClearValue());
     return resp.data;
   } catch (error) {
@@ -19,7 +18,7 @@ export const createJobThunk = async (job, thunkAPI) => {
 }
 export const editJobThunk = async ({jobId, job}, thunkAPI) => {
   try {
-    const resp = await customFetch.patch(`/jobs/${jobId}`, job, authHeader(thunkAPI));
+    const resp = await customFetch.patch(`/jobs/${jobId}`, job);
     thunkAPI.dispatch(handleClearValue());
     return resp.data;
   } catch (error) {
@@ -29,7 +28,7 @@ export const editJobThunk = async ({jobId, job}, thunkAPI) => {
 export const deleteJobThunk = async (jobId, thunkAPI) => {
   thunkAPI.dispatch(showLoading());
   try {
-    const resp = await customFetch.delete(`/jobs/${jobId}`, authHeader(thunkAPI));
+    const resp = await customFetch.delete(`/jobs/${jobId}`);
     thunkAPI.dispatch(getAllJobs());
     return resp.data.msg;
   } catch (error) {
