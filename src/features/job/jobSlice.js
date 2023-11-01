@@ -1,9 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import customFetch from "../../utils/axios";
-import { logoutUser } from "../user/userSlice";
 import { getUserFromLocalStorage } from "../../utils/localStorage";
-import { showLoading, hideLoading, getAllJobs } from "../allJobs/allJobsSlice";
+import { createJobThunk, deleteJobThunk, editJobThunk } from "./jobThunk";
 
 // init state
 const initialState = {
@@ -21,62 +19,20 @@ const initialState = {
 
 // create job
 export const createJob = createAsyncThunk(
-  'job/create',
-  async (job, thunkAPI) => {
-    try {
-      const resp = await customFetch.post('/jobs', job, {
-        headers: {
-          authorization: `Bearer ${thunkAPI.getState().user.user.token}`
-        }
-      });
-      thunkAPI.dispatch(handleClearValue());
-      return resp.data;
-    } catch (error) {
-      if (error.response.status === 401) {
-        thunkAPI.dispatch(logoutUser('Logging out...'));
-        return thunkAPI.rejectWithValue('Unauthorized! Logging out...');
-      }
-      return thunkAPI.rejectWithValue(error.response.data.msg);
-    }
-  }
+  'job/createJob',
+  createJobThunk
 );
 
 // delete job
 export const deleteJob = createAsyncThunk(
   'job/deleteJob',
-  async (jobId, thunkAPI) => {
-    thunkAPI.dispatch(showLoading());
-    try {
-      const resp = await customFetch.delete(`/jobs/${jobId}`, {
-        headers: {
-          authorization: `Bearer ${thunkAPI.getState().user.user.token}`
-        }
-      });
-      thunkAPI.dispatch(getAllJobs());
-      return resp.data.msg;
-    } catch (error) {
-      thunkAPI.dispatch(hideLoading());
-      return thunkAPI.rejectWithValue(error.response.data.msg);
-    }
-  }
+  deleteJobThunk
 );
 
 // edit job
 export const editJobById = createAsyncThunk(
   'job/editJob',
-  async ({jobId, job}, thunkAPI) => {
-    try {
-      const resp = await customFetch.patch(`/jobs/${jobId}`, job, {
-        headers: {
-          authorization: `Bearer ${thunkAPI.getState().user.user.token}`
-        }
-      });
-      thunkAPI.dispatch(handleClearValue());
-      return resp.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.msg);
-    }
-  }
+  editJobThunk
 );
 
 // job slice
