@@ -11,12 +11,12 @@ const ChartsContainer = () => {
   
   return (
     <Wrapper>
-      <h2>Monthly Applications test02</h2>
+      <h2>Monthly Applications</h2>
       <button
         type='button'
         onClick={() => setBarChart(!barChart)}
       >
-        {barChart ? 'Area Chart' : 'Bar Chart test03'}
+        {barChart ? 'Area Chart' : 'Bar Chart'}
       </button>
       {barChart ? <BarChart data={data}/> : <AreaChart data={data} />}
     </Wrapper>
