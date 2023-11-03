@@ -7,7 +7,10 @@ import { changePage } from '../features/allJobs/allJobsSlice';
 const PageBtnContainer = () => {
   const dispatch = useDispatch();
   
-  const { numOfPages, page } = useSelector((store) => store.allJobs);
+  const { 
+    numOfPages,
+    page,
+   } = useSelector((store) => store.allJobs);
   
   const pages = Array.from({length: numOfPages}, (_, index) => {
     return index + 1;
