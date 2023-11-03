@@ -15,7 +15,7 @@ const initialState = {
   isLoading: false,
   jobs: [],
   totalJobs: 0,
-  numberOfPage: 1,
+  numOfPages: 1,
   page: 1,
   stats: {},
   monthlyApplications: [],
@@ -61,7 +61,7 @@ const allJobsSlice = createSlice({
     },
     handleChange: (state, {payload: {name, value}}) => {
       // state.page = 1 later
-      state[name] = value;
+      state[name] = value
     },
     clearFilters: (state) => {
       return {
@@ -75,8 +75,10 @@ const allJobsSlice = createSlice({
       state.isLoading = true;
     },
     [getAllJobs.fulfilled]: (state, {payload}) => {
-      state.jobs = payload.jobs;
       state.isLoading = false;
+      state.jobs = payload.jobs;
+      state.numOfPages = payload.numOfPages;
+      state.totalJobs = payload.totalJobs;
     },
     [getAllJobs.rejected]: (state, {payload}) => {
       state.isLoading = false;
